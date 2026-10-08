@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useSyncExternalStore } from 'react'
 import { useTheme } from 'next-themes'
 import {
   Menu,
@@ -54,12 +54,15 @@ const Monitor = () => (
 )
 const Blank = () => <svg className="h-6 w-6" />
 
-const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme, resolvedTheme } = useTheme()
+const subscribeToHydration = () => () => {}
 
-  // When mounted on client, now we can show the UI
-  useEffect(() => setMounted(true), [])
+const ThemeSwitch = () => {
+  const mounted = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false
+  )
+  const { theme, setTheme, resolvedTheme } = useTheme()
 
   return (
     <div className="flex items-center">

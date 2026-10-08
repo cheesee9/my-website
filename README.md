@@ -191,15 +191,14 @@ npx degit 'timlrx/tailwind-nextjs-starter-blog'
 
 ## Installation
 
+This project uses Next.js 16.4.0. Use Node.js 24 and the pinned Yarn 3.6.1 release.
+
 ```bash
 yarn
 ```
 
-Please note, that if you are using Windows, you may need to run:
-
-```bash
-$env:PWD = $(Get-Location).Path
-```
+The development and build scripts explicitly use Webpack because the Contentlayer plugin
+generates content through Webpack hooks. No manual `PWD` environment variable is needed on Windows.
 
 ## Development
 
@@ -212,6 +211,9 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Edit the layout in `app` or content in `data`. With live reloading, the pages auto-updates as you edit them.
+
+Run `yarn lint` to check code and `yarn build` to verify the production build and generate RSS feeds.
+Next.js 16 no longer runs linting as part of the build, so run both checks before deployment.
 
 ## Extend / Customize
 

@@ -150,6 +150,8 @@ export const Authors = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
+  // Contentlayer's legacy alias check requires baseUrl; TypeScript resolves paths without it.
+  disableImportAliasWarning: true,
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

@@ -1,49 +1,21 @@
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTypescript from 'eslint-config-next/typescript'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
-import tsParser from '@typescript-eslint/parser'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import js from '@eslint/js'
-import { FlatCompat } from '@eslint/eslintrc'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-export default [
+/** @type {import('eslint').Linter.Config[]} */
+const eslintConfig = [
+  ...nextVitals,
+  ...nextTypescript,
+  prettierRecommended,
   {
-    ignores: ['next-env.d.ts', 'next.config.js'],
+    ignores: ['.contentlayer/**', '.yarn/**', 'out/**', 'next-env.d.ts', 'next.config.js'],
   },
-  js.configs.recommended,
-  ...compat.extends(
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'next',
-    'next/core-web-vitals'
-  ),
   {
-    plugins: {
-      '@typescript-eslint': typescriptEslint,
-    },
-
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.amd,
         ...globals.node,
-      },
-
-      parser: tsParser,
-      ecmaVersion: 5,
-      sourceType: 'commonjs',
-
-      parserOptions: {
-        project: true,
-        tsconfigRootDir: __dirname,
       },
     },
 
@@ -68,3 +40,5 @@ export default [
     },
   },
 ]
+
+export default eslintConfig
