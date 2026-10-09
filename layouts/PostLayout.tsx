@@ -67,8 +67,8 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                           src={author.avatar}
                           width={38}
                           height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
+                          alt={`${author.name} 的头像`}
+                          className="h-10 w-10 rounded-lg bg-white object-contain"
                         />
                       )}
                       <dl className="text-sm leading-5 font-medium whitespace-nowrap">
@@ -99,8 +99,12 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 <Link href={discussUrl(path)} rel="nofollow">
                   Discuss on Twitter
                 </Link>
-                {` • `}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
+                {siteMetadata.siteRepo && (
+                  <>
+                    {` • `}
+                    <Link href={editUrl(filePath)}>View on GitHub</Link>
+                  </>
+                )}
               </div>
               {siteMetadata.comments && (
                 <div

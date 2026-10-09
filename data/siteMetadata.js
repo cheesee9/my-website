@@ -1,28 +1,26 @@
-/** @type {import("pliny/config").PlinyConfig } */
+/** @type {import("pliny/config").PlinyConfig & { secondaryEmail: string } } */
 const siteMetadata = {
-  title: 'Next.js Starter Blog',
-  author: 'Tails Azimuth',
-  headerTitle: 'TailwindBlog',
-  description: 'A blog created with Next.js and Tailwind.css',
-  language: 'en-us',
+  title: 'cheesee9',
+  author: 'cheesee9',
+  headerTitle: 'cheesee9',
+  description: '你好，我是 cheesee9，一名 TypeScript 全栈开发者。',
+  language: 'zh-CN',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
-  socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
-  mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
-  github: 'https://github.com',
-  x: 'https://twitter.com/x',
-  // twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
-  threads: 'https://www.threads.net',
-  instagram: 'https://www.instagram.com',
-  medium: 'https://medium.com',
-  bluesky: 'https://bsky.app/',
-  locale: 'en-US',
+  siteUrl: (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : 'http://localhost:3000')
+  ).replace(/\/+$/, ''),
+  siteRepo: (process.env.NEXT_PUBLIC_SITE_REPO || '').replace(/\/+$/, ''),
+  siteLogo: `${process.env.BASE_PATH || ''}/static/images/cheesee9-avatar.jpg`,
+  socialBanner: `${process.env.BASE_PATH || ''}/static/images/cheesee9-avatar.jpg`,
+  email: 'cc30303749@163.com',
+  secondaryEmail: 'cc1239539190@gmail.com',
+  github: 'https://github.com/cheesee9',
+  locale: 'zh-CN',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
   analytics: {
