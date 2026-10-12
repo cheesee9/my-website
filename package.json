@@ -2,21 +2,29 @@
   "name": "tailwind-nextjs-starter-blog",
   "version": "2.4.0",
   "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "start": "next dev --webpack",
     "dev": "next dev --webpack",
     "build": "next build --webpack && node ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build --webpack",
-    "lint": "eslint app components layouts scripts",
+    "lint": "eslint app components layouts scripts mastra lib data/agentKnowledge.ts",
+    "test:agent": "node scripts/test-agent.mjs",
     "prepare": "husky"
   },
   "dependencies": {
+    "@ai-sdk/react": "4.0.140",
     "@headlessui/react": "2.2.10",
+    "@mastra/ai-sdk": "1.11.0",
+    "@mastra/core": "1.76.0",
     "@next/bundle-analyzer": "16.4.0",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
+    "ai": "7.0.137",
     "body-scroll-lock": "^3.1.5",
     "contentlayer2": "0.5.8",
     "esbuild": "0.27.3",
@@ -44,7 +52,8 @@
     "remark-github-blockquote-alert": "^2.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.18",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",

@@ -51,7 +51,7 @@ export default function Home() {
               href="#agent"
               className="rounded-xl border border-gray-300 px-5 py-3 font-medium hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-900"
             >
-              查看 Agent 状态
+              了解项目助手
             </Link>
           </div>
         </div>
@@ -66,11 +66,13 @@ export default function Home() {
               个人 Agent
             </h2>
             <span className="rounded-full border border-gray-300 px-3 py-1 text-xs text-gray-600 dark:border-gray-700 dark:text-gray-400">
-              {agent.href ? '已开放' : '筹备中'}
+              {agent.href ? '项目问答' : '筹备中'}
             </span>
           </div>
           <p className="mt-5 text-base leading-7 text-gray-600 dark:text-gray-400">
-            {agent.href ? '个人 Agent 已开放，可通过下方入口访问。' : agent.pendingMessage}
+            {agent.href
+              ? '了解奶牛行为智能检测系统的功能、技术栈和完成情况。'
+              : agent.pendingMessage}
           </p>
           <div className="mt-6 border-t border-gray-200 pt-5 dark:border-gray-800">
             <Link href={agent.href || '#contact'} className={textLink}>

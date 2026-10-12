@@ -1,3 +1,6 @@
+> 本项目已接入 Mastra + DeepSeek 项目助手，需要 Next.js 服务端部署。
+> 配置、验证及部署步骤见 [项目助手说明](./AGENT_SETUP.md)。下方保留原模板说明。
+
 ![tailwind-nextjs-banner](/public/static/images/twitter-card.png)
 
 # Tailwind Nextjs Starter Blog
@@ -292,7 +295,7 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 
 ### GitHub Pages
 
-A [`pages.yml`](.github/workflows/pages.yml) workflow is already provided. Simply select "GitHub Actions" in: `Settings > Pages > Build and deployment > Source`.
+The project assistant requires a Next.js server. The [`pages.yml`](.github/workflows/pages.yml) workflow now only validates the server build and does not deploy to GitHub Pages.
 
 ### Vercel
 
@@ -304,32 +307,9 @@ The easiest way to deploy the template is to deploy on [Vercel](https://vercel.c
 
 See [Next.js on Netlify](https://docs.netlify.com/integrations/frameworks/next-js/overview/#next-js-runtime) for suggested configuration values and more details.
 
-### Static hosting services (GitHub Pages / S3 / Firebase etc.)
+### Server hosting
 
-Run:
-
-```sh
-$ EXPORT=1 UNOPTIMIZED=1 yarn build
-```
-
-Then, deploy the generated `out` folder or run `npx serve out` it locally.
-
-> [!IMPORTANT]
-> If deploying with a URL base path, like https://example.org/myblog you need an extra `BASE_PATH` shell-var to the build command:
->
-> ```sh
-> $ EXPORT=1 UNOPTIMIZED=1 BASE_PATH=/myblog yarn build
-> ```
->
-> => In your code, `${process.env.BASE_PATH || ''}/robots.txt` will print `"/myblog/robots.txt"` in the `out` build (or only `/robots.txt` if `yarn dev`, ie: on localhost:3000)
-
-> [!TIP]
-> Alternatively to `UNOPTIMIZED=1`, to continue using `next/image`, you can use an alternative image optimization provider such as Imgix, Cloudinary or Akamai. See [image optimization documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#image-optimization) for more details.
-
-Consider removing the following features that cannot be used in a static build:
-
-1. Comment out `headers()` from `next.config.js`.
-2. Remove `api` folder and components which call the server-side function such as the Newsletter component. Not technically required and the site will build successfully, but the APIs cannot be used as they are server-side functions.
+Use `yarn build` and `yarn serve` with the environment variables described in [AGENT_SETUP.md](./AGENT_SETUP.md). Static export (`EXPORT=1`) is no longer supported because `/api/chat` needs a server runtime.
 
 ## Frequently Asked Questions
 

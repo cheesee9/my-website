@@ -54,7 +54,6 @@ const securityHeaders = [
   },
 ]
 
-const output = process.env.EXPORT ? 'export' : undefined
 const basePath = process.env.BASE_PATH || undefined
 const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 
@@ -62,11 +61,15 @@ const unoptimized = process.env.UNOPTIMIZED ? true : undefined
  * @type {import('next').NextConfig}
  **/
 module.exports = () => {
+  if (process.env.EXPORT) {
+    throw new Error('项目助手需要 Next.js 服务端运行环境，请移除 EXPORT 环境变量。')
+  }
   const plugins = [withContentlayer, withBundleAnalyzer]
   return plugins.reduce((acc, next) => next(acc), {
-    output,
     basePath,
     agentRules: false,
+    // Mastra 包含可选的工作区工具，交由 Node.js 加载，避免打包未使用的原生依赖。
+    serverExternalPackages: ['@mastra/core', '@mastra/ai-sdk'],
     reactStrictMode: true,
     trailingSlash: true,
     turbopack: {
